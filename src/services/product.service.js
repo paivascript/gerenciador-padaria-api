@@ -10,7 +10,9 @@ class ProductService {
     }
 
     updateProduct(){}
-    deleteProduct(){}
+    deleteProduct(){
+        
+    }
 }
 
 export default ProductService;

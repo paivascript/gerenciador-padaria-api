@@ -1,14 +1,33 @@
 services:
   postgres:
-    image: richard377/padaria-postgres:latest  
+    image: postgres:16
+    container_name: padaria-postgres
+    restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1
+      POSTGRES_PASSWORD: "1"
       POSTGRES_DB: padaria
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    container_name: padaria-api
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://postgres:1@postgres:5432/padaria?schema=public"
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 volumes:
   postgres_data:
