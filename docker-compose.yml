@@ -19,6 +19,7 @@ services:
 
   api:
     build: .
+    image: richard377/gerenciador-padaria-api:latest   
     container_name: padaria-api
     restart: always
     ports:
@@ -28,6 +29,10 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev
 
 volumes:
   postgres_data:

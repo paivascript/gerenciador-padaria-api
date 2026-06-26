@@ -9,7 +9,12 @@ class ProductService {
         return await prisma.produto.create({data });
     }
 
-    updateProduct(){}
+    async updateProduct(id,data){
+        const updateProduct = await prisma.produto.update({
+            where: { id },
+            data
+        });
+    }
 
     async deleteProduct(id){
         return await prisma.produto.delete({
