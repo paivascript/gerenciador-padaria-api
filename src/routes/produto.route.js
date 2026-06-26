@@ -6,5 +6,6 @@ const router = Router();
 
 router.get("/products", productController.getProducts.bind(productController));
 router.post("/products", productController.postProduct.bind(productController));
+router.delete("/products", productController.deleteProduct.bind(productController));
 
 export default router;

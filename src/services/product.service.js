@@ -10,8 +10,13 @@ class ProductService {
     }
 
     updateProduct(){}
-    deleteProduct(){
-        
+
+    async deleteProduct(id){
+        return await prisma.produto.delete({
+            where: {
+                id: id
+            },
+        });
     }
 }
 
